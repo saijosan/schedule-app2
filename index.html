@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日程調整アプリ</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #a8d5a6;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #ffcc80;
+            color: white;
+            padding: 20px;
+            margin: 0 0 20px 0;
+            font-size: 1.5em;
+        }
+        table {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+        th {
+            background-color: #ffcc80;
+            color: white;
+            font-size: 0.9em;
+        }
+        td {
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.9em;
+        }
+        td:hover {
+            background-color: #f1f1f1;
+        }
+        td.selected::before {
+            content: '◯';
+            color: #ff7043;
+            font-size: 1.5em;
+        }
+        @media screen and (max-width: 600px) {
+            th, td {
+                padding: 8px;
+                font-size: 0.8em;
+            }
+            h1 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>2024年8月の日程調整</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>あっちゃん</th>
+                <th>こうや</th>
+                <th>さいた</th>
+                <th>たっき</th>
+                <th>たっつ</th>
+                <th>りっく</th>
+                <th>りゅうの</th>
+                <th>ゆうまっちょ</th>
+                <th>東條和明</th>
+            </tr>
+        </thead>
+        <tbody id="calendar-body">
+            <!-- JavaScriptでカレンダーを生成 -->
+        </tbody>
+    </table>
+    <script>
+        const participants = ['あっちゃん', 'こうや', 'さいた', 'たっき', 'たっつ', 'りっく', 'りゅうの', 'ゆうまっちょ', '東條和明'];
+        const startDay = 11;
+        const endDay = 17;
+
+        function generateCalendar() {
+            const tbody = document.getElementById('calendar-body');
+            for (let day = startDay; day <= endDay; day++) {
+                const tr = document.createElement('tr');
+                const dateCell = document.createElement('td');
+                dateCell.textContent = `8月${day}日`;
+                tr.appendChild(dateCell);
+
+                participants.forEach(() => {
+                    const td = document.createElement('td');
+                    td.addEventListener('click', () => {
+                        td.classList.toggle('selected');
+                    });
+                    tr.appendChild(td);
+                });
+
+                tbody.appendChild(tr);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', generateCalendar);
+    </script>
+</body>
+</html>
